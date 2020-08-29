@@ -4,13 +4,14 @@ import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
 
 data class User(
+    //1 поля созданы согласно первому заданию
     val id: String,
     var firstName: String?,
     var lastName: String?,
     var avatar: String?,
     var rating: Int = 0,
     var respect: Int = 0,
-    val lastVisit: Date? = null,
+    val lastVisit: Date? = Date(),
     val isOnline: Boolean = false
 ) {
 
@@ -26,6 +27,9 @@ data class User(
         else "And his name is $firstName $lastName"}\n")}
 
     companion object Factory {
+        //1 паттерн Factory с методом makeUser(fullName),
+        //1 который принимает полное имя fullName,
+        //1 а возвращает объект User
         private var lastId: Int = -1
         fun makeUser(fullName: String?) : User {
             lastId++
