@@ -21,6 +21,6 @@ class ImageMessage (
         //2 (некорректное условие) времени отправки сообщения
         return "id: $id ${from?.firstName} " +
                 "${if (isIncoming) "получил" else "отправил"} " +
-                "сообщение \"$image\" ${date.humanizeDiff(Date().add(4, TimeUnits.MINUTE))}"
+                "сообщение \"$image\" ${date.humanizeDiff()}"
     }
 }

@@ -16,11 +16,53 @@ object Utils {
         return firstName to lastName //Pair
     }
 
-    fun transliteration(payload: String, divider: String = " ") {
+    fun transliteration(payload: String, divider: String = " ") : String =
         //Реализуй метод принимающий в качестве аргумента строку (divider по умолчанию " ")
         // и возвращающий преобразованную строку из латинских символов,
         // словарь символов соответствия алфовитов доступен в ресурсах к заданию
-    }
+
+
+
+         payload.replace(Regex("[а-я]")) {
+            when (it.value) {
+                "а" -> "a"
+                "б" -> "b"
+                "в" -> "v"
+                "г" -> "g"
+                "д" -> "d"
+                "е" -> "e"
+                "ё" -> "e"
+                "ж" -> "zh"
+                "з" -> "z"
+                "и" -> "i"
+                "й" -> "i"
+                "к" -> "k"
+                "л" -> "l"
+                "м" -> "m"
+                "н" -> "n"
+                "о" -> "o"
+                "п" -> "p"
+                "р" -> "r"
+                "с" -> "s"
+                "т" -> "t"
+                "у" -> "u"
+                "ф" -> "f"
+                "х" -> "h"
+                "ц" -> "c"
+                "ч" -> "ch"
+                "ш" -> "sh"
+                "щ" -> "sh'"
+                "ъ" -> ""
+                "ы" -> "i"
+                "ь" -> ""
+                "э" -> "e"
+                "ю" -> "yu"
+                "я" -> "ya"
+                else -> it.value
+            }
+        }
+
+
 
     fun toInitials(firstName: String?, lastName: String?): String? {
 //Реализуй метод Utils.toInitials(firstName lastName)
@@ -45,5 +87,5 @@ object Utils {
                             return "${firstName.toCharArray().first().toUpperCase()}" +
                                     "${lastName.toCharArray().first().toUpperCase()}"
                         } else return null
-                }
     }
+}

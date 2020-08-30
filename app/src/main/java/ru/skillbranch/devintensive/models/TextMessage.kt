@@ -21,6 +21,6 @@ class TextMessage(
         //2 (некорректное условие) времени отправки сообщения
         return "id: $id ${from?.firstName} " +
                 "${if (isIncoming) "получил" else "отправил"} " +
-                "сообщение \"$text\" ${date.humanizeDiff(Date().add(1, TimeUnits.SECOND))}"
+                "сообщение \"$text\" ${date.humanizeDiff()}"
     }
 }
