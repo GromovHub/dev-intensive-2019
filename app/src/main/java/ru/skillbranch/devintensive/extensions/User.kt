@@ -19,7 +19,7 @@ fun User.toUserView(): UserView {
             nickName = "$$nickname",
             initials = "$initials",
             avatar = avatar,
-            status = "$status"
+            status = status
         )
 
 }
