@@ -7,13 +7,25 @@ object Utils {
         //Необходимо реализовать утилитный метод parseFullName(fullName)
         // принимающий в качестве аргумента полное имя пользователя
         // и возвращающий пару значений "firstName lastName"
+        if (fullName == null) {
+            val firstName = null
+            val lastName = null
+            return Pair(firstName, lastName)
+        } else
+            if (fullName.trim() == "") {
+                val firstName = null
+                val lastName = null
+                return Pair(firstName, lastName)
+            } else {
+                val parts = fullName.split(" ")
 
-        val parts = fullName?.split(" ")
+                val firstName = parts.getOrNull(0)
+                val lastName = parts.getOrNull(1)
 
-        val firstName = parts?.getOrNull(0) ?: null
-        val lastName = parts?.getOrNull(1) ?: null
+                return firstName to lastName //Pair
+            }
 
-        return firstName to lastName //Pair
+
     }
 
     fun transliteration(payload: String, divider: String = " ") : String =
