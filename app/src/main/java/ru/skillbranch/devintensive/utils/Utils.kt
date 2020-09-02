@@ -1,6 +1,6 @@
 package ru.skillbranch.devintensive.utils
 
-import java.io.Serializable
+import java.util.*
 
 object Utils {
     fun parseFullName(fullName: String?): Pair<String?, String?> {
@@ -28,51 +28,70 @@ object Utils {
 
     }
 
-    fun transliteration(payload: String, divider: String = " ") : String =
+    fun transliteration(payload: String?, divider: String = " "): String? {
         //Реализуй метод принимающий в качестве аргумента строку (divider по умолчанию " ")
         // и возвращающий преобразованную строку из латинских символов,
         // словарь символов соответствия алфовитов доступен в ресурсах к заданию
-
-
-
-         payload.replace(Regex("[а-я]")) {
-            when (it.value) {
-                "а" -> "a"
-                "б" -> "b"
-                "в" -> "v"
-                "г" -> "g"
-                "д" -> "d"
-                "е" -> "e"
-                "ё" -> "e"
-                "ж" -> "zh"
-                "з" -> "z"
-                "и" -> "i"
-                "й" -> "i"
-                "к" -> "k"
-                "л" -> "l"
-                "м" -> "m"
-                "н" -> "n"
-                "о" -> "o"
-                "п" -> "p"
-                "р" -> "r"
-                "с" -> "s"
-                "т" -> "t"
-                "у" -> "u"
-                "ф" -> "f"
-                "х" -> "h"
-                "ц" -> "c"
-                "ч" -> "ch"
-                "ш" -> "sh"
-                "щ" -> "sh'"
-                "ъ" -> ""
-                "ы" -> "i"
-                "ь" -> ""
-                "э" -> "e"
-                "ю" -> "yu"
-                "я" -> "ya"
-                else -> it.value
+//------------------------------
+        val trimPayload = payload?.trim()
+        return when {
+            trimPayload == null -> null
+            trimPayload == "" -> null
+            trimPayload.isNotEmpty() -> {
+                if (trimPayload.split(" ").size == 1) {
+                    return trimPayload.toLowerCase().transReplace().capitalize()
+                } else {
+                    return trimPayload.split(" ").get(0).toLowerCase().transReplace().capitalize() +
+                            divider +
+                    trimPayload.split(" ").get(1).toLowerCase().transReplace().capitalize()
+                }
             }
+            else -> null
+
         }
+    }
+//------------------------------
+    fun String.transReplace() : String {
+    // заменяет маленькие русские буквы на маленькие английские буквы
+    return this.replace(Regex("[а-я]")) {
+        when (it.value) {
+            "а" -> "a"
+            "б" -> "b"
+            "в" -> "v"
+            "г" -> "g"
+            "д" -> "d"
+            "е" -> "e"
+            "ё" -> "e"
+            "ж" -> "zh"
+            "з" -> "z"
+            "и" -> "i"
+            "й" -> "i"
+            "к" -> "k"
+            "л" -> "l"
+            "м" -> "m"
+            "н" -> "n"
+            "о" -> "o"
+            "п" -> "p"
+            "р" -> "r"
+            "с" -> "s"
+            "т" -> "t"
+            "у" -> "u"
+            "ф" -> "f"
+            "х" -> "h"
+            "ц" -> "c"
+            "ч" -> "ch"
+            "ш" -> "sh"
+            "щ" -> "sh'"
+            "ъ" -> ""
+            "ы" -> "i"
+            "ь" -> ""
+            "э" -> "e"
+            "ю" -> "yu"
+            "я" -> "ya"
+            else -> it.value
+        }
+    }
+}
 
 
 
