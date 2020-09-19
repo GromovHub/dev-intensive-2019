@@ -1,6 +1,11 @@
 package ru.skillbranch.devintensive.utils
 
-import java.util.*
+import android.app.Activity
+import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.Fragment
+import ru.skillbranch.devintensive.MainActivity
 
 object Utils {
     fun parseFullName(fullName: String?): Pair<String?, String?> {
@@ -118,5 +123,19 @@ object Utils {
                             return "${firstName.toCharArray().first().toUpperCase()}" +
                                     "${lastName.toCharArray().first().toUpperCase()}"
                         } else return null
+    }
+
+    // три следующие функции создают возможность скрывать клавиатуру
+    fun Fragment.hideKeyboard() {
+        view?.let { activity?.hideKeyboard(it) }
+    }
+
+    fun Activity.hideKeyboard() {
+        if (currentFocus == null) View(this) else currentFocus?.let { hideKeyboard(it) }
+    }
+
+    fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

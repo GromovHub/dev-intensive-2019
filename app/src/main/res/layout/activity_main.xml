@@ -33,8 +33,10 @@
         android:layout_marginTop="@dimen/font_normal_16"
         android:background="@color/color_primary"
         android:orientation="horizontal">
-
+<!--первые две строчки определяют поведение кнопки отправки-->
         <EditText
+            android:inputType="textCapWords"
+            android:imeOptions="actionDone"
             android:id="@+id/et_message"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

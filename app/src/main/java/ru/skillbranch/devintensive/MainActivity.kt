@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive
 
+import android.app.Activity
 import android.graphics.Color
 import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
@@ -7,11 +8,13 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.skillbranch.devintensive.models.Bender
+import ru.skillbranch.devintensive.utils.Utils.hideKeyboard
 import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -38,6 +41,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         textTxt.text = benderObj.askQuestion()
 
         sendBtn.setOnClickListener(this)
+// фция ниже должна эмитировать нажатие кнопки отправки при нажатии на DONE и скрывать клаву
+        messageEt.setOnEditorActionListener { v, actionId, event ->
+            if(actionId == EditorInfo.IME_ACTION_DONE){
+                onClick(this.sendBtn) //это что то интересное
+                this.hideKeyboard()
+                true
+            } else {
+                false
+            }
+        }
     }
 
     override fun onStart() {
