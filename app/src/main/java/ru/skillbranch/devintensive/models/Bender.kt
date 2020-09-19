@@ -11,14 +11,26 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         Question.IDLE -> Question.IDLE.question
     }
 
+        var counter = 0
     fun listenAnswer(answer: String): Pair<String, Triple<Int, Int, Int>> {
-        return if (question.answers.contains(answer)) {
-            question = question.nextQuestion()
-            "Отлично, это правильный ответ!\n${question.question}" to status.color
+        if (counter < 3) {
+            return if (question.answers.contains(answer)) {
+                question = question.nextQuestion()
+                "Отлично - ты справился\n${question.question}" to status.color
+            } else {
+                counter++
+                status = status.nextStatus()
+                "Это неправильный ответ\n${question.question}" to status.color
+            }
         } else {
-            status = status.nextStatus()
-            "Это неправильный ответ!\n${question.question}" to status.color
+            counter = 0
+            question = Question.NAME
+            status = Status.NORMAL
+
+            return "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+
         }
+
 
     }
 
@@ -26,7 +38,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         NORMAL(Triple(255, 255, 255)),
         WARNING(Triple(255, 120, 0)),
         DANGER(Triple(255, 60, 60)),
-        CRITICAL(Triple(255, 255, 0));
+        CRITICAL(Triple(255, 0, 0));
 
         fun nextStatus(): Status {
             return if (this.ordinal < values().lastIndex) {
@@ -53,7 +65,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         SERIAL("Мой серийный номер?", listOf("2716057")) {
             override fun nextQuestion(): Question = IDLE
         },
-        IDLE("На этом все, вопросов больше нет", listOf()) {
+        IDLE("Отлично - ты справился\nНа этом все, вопросов больше нет", listOf()) {
             override fun nextQuestion(): Question = IDLE
         };
 
