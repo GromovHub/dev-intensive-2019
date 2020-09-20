@@ -18,6 +18,18 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
                 question = question.nextQuestion()
                 "Отлично - ты справился\n${question.question}" to status.color
             } else {
+//                when (question) {
+//                    Question.NAME -> {
+//                        counter++
+//                        status = status.nextStatus()
+//                        "Имя должно начинаться с заглавной буквы\n${question.question}" to status.color
+//                    }
+//                        Question.PROFESSION ->
+//                    Question.MATERIAL ->
+//                    Question.BDAY ->
+//                    Question.SERIAL ->
+//                    Question.IDLE ->
+//                }
                 counter++
                 status = status.nextStatus()
                 "Это неправильный ответ\n${question.question}" to status.color

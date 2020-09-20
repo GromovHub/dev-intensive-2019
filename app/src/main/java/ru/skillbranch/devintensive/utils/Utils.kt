@@ -5,7 +5,6 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
-import ru.skillbranch.devintensive.MainActivity
 
 object Utils {
     fun parseFullName(fullName: String?): Pair<String?, String?> {
